@@ -4,19 +4,30 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class Morra {
 
-  private int numOfRound = 0;
+  private int numOfRound;
   private String player;
+  private Difficulty currentDifficulty;
+  private String[] humanInput;
+  private String[] javisInput;
+  private int playerScore;
+  private int javisScore;
+  private int requiredPointsToWin;
 
   public Morra() {}
 
   public void newGame(Difficulty difficulty, int pointsToWin, String[] options) {
     player = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
+    currentDifficulty = difficulty;
+    playerScore = 0;
+    javisScore = 0;
+    numOfRound = 0;
+    requiredPointsToWin = pointsToWin;
   }
 
   public String getPlayerName() {
     return player;
-  } 
+  }
 
   public void play() {
     numOfRound++;
@@ -24,12 +35,33 @@ public class Morra {
     MessageCli.ASK_INPUT.printMessage();
 
     Human human = new Human();
-    // Javis javis = new Javis(new EasyLevel());
-    String[] humanInput = human.getHumanInput(player);
-    // String[] javisInput = javis.getJavisInput();
+    DifficultyFactory difficultyFactory = new DifficultyFactory();
+    DifficultyType difficultyType = difficultyFactory.createDifficulty(currentDifficulty);
+    Javis javis = new Javis(difficultyType);
 
+    humanInput = human.getHumanInput(player);
+    javisInput = javis.getJavisInput(difficultyType);
+    getResult(javisInput, humanInput);
+  }
 
-    
+  public void getResult(String[] javisInput, String[] humanInput) {
+    int javisFinger = Integer.valueOf(javisInput[0]);
+    int humanFinger = Integer.valueOf(humanInput[0]);
+    int sum = javisFinger + humanFinger;
+    if (sum == Integer.valueOf(javisInput[1])) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WIN");
+      javisScore ++;
+    } else if (sum == Integer.valueOf(humanInput[1])) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WIN");
+      playerScore ++;
+    } else {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
+    }
+    if (javisScore == requiredPointsToWin) {
+      MessageCli.END_GAME.printMessage("Javis", String.valueOf(numOfRound));
+    } else if (playerScore == requiredPointsToWin) {
+      MessageCli.END_GAME.printMessage(player, String.valueOf(numOfRound));
+    }
   }
 
   public void showStats() {}

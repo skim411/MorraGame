@@ -6,7 +6,7 @@ import java.util.List;
 public class Human {
 
   private String[] humanInput;
-  private List<String> historyInput = new ArrayList<>();
+  private List<String> historyHumanInput = new ArrayList<>();
 
   public String[] getHumanInput(String playerName) {
     Boolean validInput = false;
@@ -25,14 +25,14 @@ public class Human {
       } else if (validInput) {
         MessageCli.PRINT_INFO_HAND.printMessage(
             playerName, Integer.toString(playerFingers), Integer.toString(playerSum));
-        historyInput.add(input);
+            historyHumanInput.add(humanInput[0]);
       }
     }
     return humanInput;
   }
 
   public List<String> getHistoryInput() {
-    return historyInput;
+    return historyHumanInput;
   }
 
   public Boolean checkInput(String input) {
@@ -41,7 +41,7 @@ public class Human {
     int playerFingers = Integer.parseInt(humanInput[0]);
     int playerSum = Integer.parseInt(humanInput[1]);
     // if input is not integer, return false
-    if (Utils.isInteger(input)) {
+    if (!Utils.isInteger(humanInput[0]) | !Utils.isInteger(humanInput[1])) {
       validInput = false;
       // if fingers is not between 1 and 5 or sum is not between 1 and 10, return false
     } else if ((playerFingers < 1) | (playerFingers > 5) | (playerSum < 1) | (playerSum > 10)) {
@@ -56,12 +56,10 @@ public class Human {
   public int getAverageFingers() {
     int averageFingers = 0;
     int sum = 0;
-    for (String input : historyInput) {
-      String[] inputSplit = input.split(" ", 2);
-      int playerFingers = Integer.parseInt(inputSplit[0]);
-      sum += playerFingers;
+    for (String fingers : historyHumanInput) {
+      sum += Integer.parseInt(fingers);
     }
-    averageFingers = sum / historyInput.size();
+    averageFingers = sum / historyHumanInput.size();
     return averageFingers;
   }
 
@@ -69,13 +67,11 @@ public class Human {
   public int getMostFrequentFingers() {
     int maxCount = 0;
     int fingersMaxFreq = 0;
-    for (int i = 0; i < historyInput.size(); i++) {
-      String[] inputSplit = historyInput.get(i).split(" ", 2);
-      int playerFingers = Integer.parseInt(inputSplit[0]);
+    for (int i = 0; i < historyHumanInput.size(); i++) {
+      int playerFingers = Integer.parseInt(historyHumanInput.get(i));
       int count = 0;
-      for (int j = 0; j < historyInput.size(); j++) {
-        String[] inputSplit2 = historyInput.get(j).split(" ", 2);
-        int playerFingers2 = Integer.parseInt(inputSplit2[0]);
+      for (int j = 0; j < historyHumanInput.size(); j++) {
+        int playerFingers2 = Integer.parseInt(historyHumanInput.get(j));
         if (playerFingers == playerFingers2) {
           count++;
         }

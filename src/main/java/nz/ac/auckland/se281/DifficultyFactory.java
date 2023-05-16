@@ -7,13 +7,13 @@ public class DifficultyFactory {
     public DifficultyType createDifficulty(Difficulty difficulty) {
         switch (difficulty) {
             case EASY:
-                return new Easy();
+                return new EasyType();
         
             case MEDIUM:
-                return new Medium();
+                return new MediumType();
 
             case HARD:
-                return new Hard();
+                return new HardType();
             
             default:
                 return null;

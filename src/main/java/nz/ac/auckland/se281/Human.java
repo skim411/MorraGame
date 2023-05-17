@@ -7,8 +7,9 @@ public class Human {
 
   private String[] humanInput;
   private List<String> historyHumanInput = new ArrayList<>();
+  
 
-  public String[] getHumanInput(String playerName) {
+  public String[] getHumanInput() {
     Boolean validInput = false;
 
     while (!validInput) {
@@ -16,16 +17,12 @@ public class Human {
       String input = Utils.scanner.nextLine();
       // split input to 2 and name first substring as playerFingers and second as playerSum
       humanInput = input.split(" ", 2);
-      int playerFingers = Integer.parseInt(humanInput[0]);
-      int playerSum = Integer.parseInt(humanInput[1]);
       validInput = checkInput(input);
       if (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
         MessageCli.ASK_INPUT.printMessage();
-      } else if (validInput) {
-        MessageCli.PRINT_INFO_HAND.printMessage(
-            playerName, Integer.toString(playerFingers), Integer.toString(playerSum));
-            historyHumanInput.add(humanInput[0]);
+      } else {
+        historyHumanInput.add(humanInput[0]);
       }
     }
     return humanInput;

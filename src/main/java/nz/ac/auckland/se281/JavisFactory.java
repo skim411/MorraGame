@@ -3,16 +3,16 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class JavisFactory {
-    public DifficultyType createDifficulty(Difficulty difficulty) {
+    public DifficultyLevel createDifficulty(Difficulty difficulty) {
         switch (difficulty) {
             case EASY:
-                return new EasyType(new RandomStrategy());
+                return new EasyLevel(new RandomStrategy());
         
             case MEDIUM:
-                return new MediumType(new AverageStrategy());
+                return new MediumLevel(new AverageStrategy());
 
             case HARD:
-                return new HardType(new TopStrategy());
+                return new HardLevel(new TopStrategy());
 
             case MASTER:
                 return new MasterType();

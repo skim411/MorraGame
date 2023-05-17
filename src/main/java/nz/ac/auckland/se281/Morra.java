@@ -35,12 +35,13 @@ public class Morra {
     MessageCli.ASK_INPUT.printMessage();
 
     Human human = new Human();
-    DifficultyFactory difficultyFactory = new DifficultyFactory();
-    DifficultyType difficultyType = difficultyFactory.createDifficulty(currentDifficulty);
-    Javis javis = new Javis(difficultyType);
+    JavisFactory javisFactory = new JavisFactory();
+    DifficultyType difficultyType = javisFactory.createDifficulty(currentDifficulty);
 
-    humanInput = human.getHumanInput(player);
-    javisInput = javis.getJavisInput(difficultyType);
+    humanInput = human.getHumanInput();
+    javisInput = difficultyType.getJavisInput();
+    MessageCli.PRINT_INFO_HAND.printMessage(player, humanInput[0], humanInput[1]);
+    MessageCli.PRINT_INFO_HAND.printMessage("Javis", javisInput[0], javisInput[1]);
     getResult(javisInput, humanInput);
   }
 
@@ -50,10 +51,10 @@ public class Morra {
     int sum = javisFinger + humanFinger;
     if (sum == Integer.valueOf(javisInput[1])) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WIN");
-      javisScore ++;
+      javisScore++;
     } else if (sum == Integer.valueOf(humanInput[1])) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WIN");
-      playerScore ++;
+      playerScore++;
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
@@ -62,6 +63,10 @@ public class Morra {
     } else if (playerScore == requiredPointsToWin) {
       MessageCli.END_GAME.printMessage(player, String.valueOf(numOfRound));
     }
+  }
+
+  public int getRound() {
+    return numOfRound;
   }
 
   public void showStats() {}

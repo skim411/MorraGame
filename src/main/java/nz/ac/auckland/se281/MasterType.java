@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281;
 
-public class MasterType implements DifficultyType {
+public class MasterType implements DifficultyLevel {
 
   private Strategy master;
 

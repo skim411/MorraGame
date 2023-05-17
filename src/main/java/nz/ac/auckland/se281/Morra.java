@@ -30,19 +30,23 @@ public class Morra {
   }
 
   public void play() {
-    numOfRound++;
-    MessageCli.START_ROUND.printMessage(Integer.toString(numOfRound));
-    MessageCli.ASK_INPUT.printMessage();
+    if (javisScore == requiredPointsToWin || playerScore == requiredPointsToWin) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    } else {
+      numOfRound++;
+      MessageCli.START_ROUND.printMessage(Integer.toString(numOfRound));
+      MessageCli.ASK_INPUT.printMessage();
 
-    Human human = new Human();
-    JavisFactory javisFactory = new JavisFactory();
-    DifficultyType difficultyType = javisFactory.createDifficulty(currentDifficulty);
+      Human human = new Human();
+      JavisFactory javisFactory = new JavisFactory();
+      DifficultyLevel difficultyType = javisFactory.createDifficulty(currentDifficulty);
 
-    humanInput = human.getHumanInput();
-    javisInput = difficultyType.getJavisInput();
-    MessageCli.PRINT_INFO_HAND.printMessage(player, humanInput[0], humanInput[1]);
-    MessageCli.PRINT_INFO_HAND.printMessage("Javis", javisInput[0], javisInput[1]);
-    getResult(javisInput, humanInput);
+      humanInput = human.getHumanInput();
+      javisInput = difficultyType.getJavisInput();
+      MessageCli.PRINT_INFO_HAND.printMessage(player, humanInput[0], humanInput[1]);
+      MessageCli.PRINT_INFO_HAND.printMessage("Javis", javisInput[0], javisInput[1]);
+      getResult(javisInput, humanInput);
+    }
   }
 
   public void getResult(String[] javisInput, String[] humanInput) {
@@ -55,6 +59,8 @@ public class Morra {
     } else if (sum == Integer.valueOf(humanInput[1])) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WIN");
       playerScore++;
+    } else if (sum == Integer.valueOf(humanInput[1]) && sum == Integer.valueOf(javisInput[1])) {
+      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
@@ -69,5 +75,14 @@ public class Morra {
     return numOfRound;
   }
 
-  public void showStats() {}
+  public void showStats() {
+    if (numOfRound == 0) {
+      MessageCli.GAME_NOT_STARTED.printMessage();
+    } else {
+      int numOfRoundToPlayerWin = requiredPointsToWin - playerScore;      
+      int numOfRoundToJavisWin = requiredPointsToWin - javisScore;
+      MessageCli.PRINT_PLAYER_WINS.printMessage(player, Integer.toString(playerScore), Integer.toString(numOfRoundToPlayerWin));
+      MessageCli.PRINT_PLAYER_WINS.printMessage("Javis", Integer.toString(javisScore), Integer.toString(numOfRoundToJavisWin));
+    }
+  }
 }

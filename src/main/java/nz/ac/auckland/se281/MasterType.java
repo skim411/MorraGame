@@ -23,7 +23,7 @@ public class MasterType implements DifficultyLevel {
   }
 
   @Override
-  public String[] getJavisInput() {
-    return master.decideJavisInput();
+  public String[] getJarvisInput() {
+    return master.decideJarvisInput();
   }
 }

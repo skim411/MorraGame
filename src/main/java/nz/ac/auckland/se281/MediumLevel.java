@@ -1,16 +1,16 @@
 package nz.ac.auckland.se281;
 
 public class MediumLevel implements DifficultyLevel {
-    
-    private String[] averageJavisInput;
-    private Strategy average = new AverageStrategy();
 
-    public MediumLevel(Strategy strategy) {
-        this.average = strategy;
-    }
+  private String[] averageJarvisInput;
+  private Strategy average = new AverageStrategy();
 
-    public String[] getJavisInput() {
-        averageJavisInput = average.decideJavisInput();
-        return averageJavisInput;
-    }
+  public MediumLevel(Strategy strategy) {
+    this.average = strategy;
+  }
+
+  public String[] getJarvisInput() {
+    averageJarvisInput = average.decideJarvisInput();
+    return averageJarvisInput;
+  }
 }

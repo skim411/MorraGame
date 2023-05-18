@@ -26,7 +26,7 @@ public class MasterType implements DifficultyLevel {
   }
 
   @Override
-  public String[] getJarvisHand() {
-    return master.decideJarvisHand();
+  public String[] getJarvisHand(int numOfRound, Human player) {
+    return master.decideJarvisHand(numOfRound, player);
   }
 }

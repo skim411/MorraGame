@@ -12,6 +12,7 @@ public class Morra {
   private int playerScore;
   private int jarvisScore;
   private int requiredPointsToWin;
+  private Human player;
 
   public Morra() {}
 
@@ -24,6 +25,7 @@ public class Morra {
     playerName = options[0];
     MessageCli.WELCOME_PLAYER.printMessage(options[0]);
     currentDifficulty = difficulty;
+    player = new Human();
   }
 
   public String getPlayerName() {
@@ -39,16 +41,15 @@ public class Morra {
     if (jarvisScore == requiredPointsToWin || playerScore == requiredPointsToWin) {
       MessageCli.GAME_NOT_STARTED.printMessage();
     } else {
-      numOfRound++;
+      this.numOfRound++;
       MessageCli.START_ROUND.printMessage(Integer.toString(numOfRound));
       MessageCli.ASK_INPUT.printMessage();
 
-      Human player = new Human();
       JarvisFactory jarvisFactory = new JarvisFactory();
       DifficultyLevel difficultyType = jarvisFactory.createDifficulty(currentDifficulty);
 
       // get the fingers and sum from player and jarvis
-      jarvisHand = difficultyType.getJarvisHand();
+      jarvisHand = difficultyType.getJarvisHand(numOfRound, player);
       playerHand = player.getPlayerHand();
 
       MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerHand[0], playerHand[1]);

@@ -1,20 +1,13 @@
 package nz.ac.auckland.se281;
 
+import java.util.List;
+
 public class TopStrategy implements Strategy {
 
-  private int numOfRound;
-
-  public int getMostFreqPlayerFingers(Human player) {
-    return player.getMostFrequentFingers();
-  }
-
-  public int getNumOfRound(Morra game) {
-    numOfRound = game.getRound();
-    return numOfRound;
-  }
+  List<String> historyPlayerFingers;
 
   @Override
-  public String[] decideJarvisHand() {
+  public String[] decideJarvisHand(int numOfRound, Human player) {
     String[] topJavisHand = new String[2];
     topJavisHand[0] = Integer.toString(Utils.getRandomNumber(1, 5));
     int jarvisFingers = Integer.valueOf(topJavisHand[0]);
@@ -26,9 +19,38 @@ public class TopStrategy implements Strategy {
     } else {
       // if number of round is greater or equal to 5, jarvis will get the most common fingers
       // that player has played
-      int mostCommonFingers = getMostFreqPlayerFingers(new Human());
+      getHistoryPlayerFingers(player);
+      int mostCommonFingers = getMostFrequentFingers();
       topJavisHand[1] = Integer.toString(jarvisFingers + mostCommonFingers);
     }
     return topJavisHand;
+  }
+
+  @Override
+  public List<String> getHistoryPlayerFingers(Human player) {
+    historyPlayerFingers = player.getHistoryPlayerFingers();
+    return historyPlayerFingers;
+  }
+
+  // get most frequent fingers of player
+  public int getMostFrequentFingers() {
+    int maxCount = 0;
+    int maxFreqFingers = 0;
+    // loop through historyPlayerFingers to get the most frequent fingers
+    for (int i = 0; i < historyPlayerFingers.size(); i++) {
+      int playerFingers = Integer.valueOf(historyPlayerFingers.get(i));
+      int count = 0;
+      for (int j = 0; j < historyPlayerFingers.size(); j++) {
+        int comparedFingers = Integer.valueOf(historyPlayerFingers.get(j));
+        if (playerFingers == comparedFingers) {
+          count++;
+        }
+      }
+      if (count > maxCount) {
+        maxCount = count;
+        maxFreqFingers = playerFingers;
+      }
+    }
+    return maxFreqFingers;
   }
 }

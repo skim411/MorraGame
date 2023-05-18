@@ -4,7 +4,7 @@ import java.util.List;
 
 public class AverageStrategy implements Strategy {
 
-  List<String> historyPlayerFingers;
+  private List<String> historyPlayerFingers;
 
   @Override
   public String[] decideJarvisHand(int numOfRound, Human player) {

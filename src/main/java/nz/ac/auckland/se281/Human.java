@@ -7,9 +7,10 @@ public class Human {
 
   private String[] playerHand;
   private List<String> historyPlayerFingers = new ArrayList<>();
+  Boolean validInput;
 
   public String[] getPlayerHand() {
-    Boolean validInput = false;
+    validInput = false;
 
     while (!validInput) {
       // scan player's input
@@ -33,7 +34,6 @@ public class Human {
 
   public Boolean checkInput(String input) {
     // check player's input
-    Boolean validInput = false;
     int playerFingers = Integer.valueOf(playerHand[0]);
     int playerSum = Integer.valueOf(playerHand[1]);
     // if input is not integer, return false

@@ -8,10 +8,6 @@ public class MasterLevel implements DifficultyLevel {
     this.master = strategy;
   }
 
-  // public void setStrategy(Strategy strategy) {
-  //   this.master = strategy;
-  // }
-
   @Override
   public String[] getJarvisHand(int numOfRound, Human player) {
     return master.decideJarvisHand(numOfRound, player);

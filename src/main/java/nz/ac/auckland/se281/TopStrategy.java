@@ -4,8 +4,6 @@ public class TopStrategy implements Strategy {
 
   private int numOfRound;
 
-  public TopStrategy() {}
-
   public int getMostFreqPlayerFingers(Human player) {
     return player.getMostFrequentFingers();
   }

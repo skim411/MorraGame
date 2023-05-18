@@ -4,8 +4,6 @@ public class AverageStrategy implements Strategy {
 
   private int numOfRound;
 
-  public AverageStrategy() {}
-
   public int getAveragePlayerFingers(Human player) {
     return player.getAverageFingers();
   }

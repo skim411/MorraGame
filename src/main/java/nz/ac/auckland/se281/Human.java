@@ -7,7 +7,7 @@ public class Human {
 
   private String[] playerHand;
   private List<String> historyPlayerFingers = new ArrayList<>();
-  Boolean validInput;
+  private Boolean validInput;
 
   public String[] getPlayerHand() {
     validInput = false;

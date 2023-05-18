@@ -8,6 +8,7 @@ public class MediumLevel implements DifficultyLevel {
     this.average = strategy;
   }
 
+  @Override
   public String[] getJarvisHand(int numOfRound, Human player) {
     return average.decideJarvisHand(numOfRound, player);
   }

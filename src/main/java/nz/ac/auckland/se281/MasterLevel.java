@@ -1,10 +1,10 @@
 package nz.ac.auckland.se281;
 
-public class MasterType implements DifficultyLevel {
+public class MasterLevel implements DifficultyLevel {
 
   private Strategy master;
 
-  public MasterType(Strategy strategy) {
+  public MasterLevel(Strategy strategy) {
     this.master = strategy;
   }
 
@@ -19,7 +19,7 @@ public class MasterType implements DifficultyLevel {
     } else {
       if (game.getRound() % 2 == 0) {
         master = new AverageStrategy();
-      } else {
+      } else if (game.getRound() % 2 == 1) {
         master = new TopStrategy();
       }
     }

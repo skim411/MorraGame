@@ -6,7 +6,7 @@ public class TopStrategy implements Strategy {
 
   public TopStrategy() {}
 
-  public int getMostCommonFingers(Human player) {
+  public int getMostFreqPlayerFingers(Human player) {
     return player.getMostFrequentFingers();
   }
 
@@ -16,18 +16,21 @@ public class TopStrategy implements Strategy {
   }
 
   @Override
-  public String[] decideJarvisInput() {
-    String[] topInput = new String[2];
-    topInput[0] = Integer.toString(Utils.getRandomNumber(1, 5));
-    int jarvisFingers = Integer.valueOf(topInput[0]);
+  public String[] decideJarvisHand() {
+    String[] topJavisHand = new String[2];
+    topJavisHand[0] = Integer.toString(Utils.getRandomNumber(1, 5));
+    int jarvisFingers = Integer.valueOf(topJavisHand[0]);
+    // if number of round is less than 5, jarvis will randomly choose a number
     if (numOfRound <= 4) {
       int min = jarvisFingers + 1;
       int max = jarvisFingers + 5;
-      topInput[1] = Integer.toString(Utils.getRandomNumber(min, max));
+      topJavisHand[1] = Integer.toString(Utils.getRandomNumber(min, max));
     } else {
-      int mostCommonFingers = getMostCommonFingers(new Human());
-      topInput[1] = Integer.toString(jarvisFingers + mostCommonFingers);
+      // if number of round is greater or equal to 5, jarvis will get the most common fingers
+      // that player has played
+      int mostCommonFingers = getMostFreqPlayerFingers(new Human());
+      topJavisHand[1] = Integer.toString(jarvisFingers + mostCommonFingers);
     }
-    return topInput;
+    return topJavisHand;
   }
 }

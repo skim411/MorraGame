@@ -2,16 +2,14 @@ package nz.ac.auckland.se281;
 
 public class HardLevel implements DifficultyLevel {
 
-  private String[] topJarvisInput;
-  private Strategy top = new TopStrategy();
+  private Strategy top;
 
   public HardLevel(Strategy strategy) {
     this.top = strategy;
   }
 
   @Override
-  public String[] getJarvisInput() {
-    topJarvisInput = top.decideJarvisInput();
-    return topJarvisInput;
+  public String[] getJarvisHand() {
+    return top.decideJarvisHand();
   }
 }

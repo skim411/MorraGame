@@ -4,13 +4,16 @@ public class MasterType implements DifficultyLevel {
 
   private Strategy master;
 
-  public MasterType() {}
+  public MasterType(Strategy strategy) {
+    this.master = strategy;
+  }
 
   public void setStrategy(Strategy strategy) {
     this.master = strategy;
   }
 
   public void changeStrategy(Morra game) {
+    // change strategy after 3 rounds
     if (game.getRound() <= 3) {
       master = new RandomStrategy();
     } else {
@@ -23,7 +26,7 @@ public class MasterType implements DifficultyLevel {
   }
 
   @Override
-  public String[] getJarvisInput() {
-    return master.decideJarvisInput();
+  public String[] getJarvisHand() {
+    return master.decideJarvisHand();
   }
 }

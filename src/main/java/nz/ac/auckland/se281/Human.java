@@ -5,43 +5,42 @@ import java.util.List;
 
 public class Human {
 
-  private String[] humanInput;
-  private List<String> historyHumanInput = new ArrayList<>();
-  
+  private String[] playerHand;
+  private List<String> historyPlayerFingers = new ArrayList<>();
 
-  public String[] getHumanInput() {
+  public String[] getPlayerHand() {
     Boolean validInput = false;
 
     while (!validInput) {
       // scan player's input
       String input = Utils.scanner.nextLine();
       // split input to 2 and name first substring as playerFingers and second as playerSum
-      humanInput = input.split(" ", 2);
+      playerHand = input.split(" ", 2);
       validInput = checkInput(input);
       if (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
         MessageCli.ASK_INPUT.printMessage();
       } else {
-        historyHumanInput.add(humanInput[0]);
+        historyPlayerFingers.add(playerHand[0]);
       }
     }
-    return humanInput;
+    return playerHand;
   }
 
-  public List<String> getHistoryInput() {
-    return historyHumanInput;
-  }
+  // public List<String> getHistoryInput() {
+  //   return historyHumanInput;
+  // }
 
   public Boolean checkInput(String input) {
     // check player's input
     Boolean validInput = false;
-    int playerFingers = Integer.parseInt(humanInput[0]);
-    int playerSum = Integer.parseInt(humanInput[1]);
+    int playerFingers = Integer.valueOf(playerHand[0]);
+    int playerSum = Integer.valueOf(playerHand[1]);
     // if input is not integer, return false
-    if (!Utils.isInteger(humanInput[0]) | !Utils.isInteger(humanInput[1])) {
+    if (!Utils.isInteger(playerHand[0]) || !Utils.isInteger(playerHand[1])) {
       validInput = false;
       // if fingers is not between 1 and 5 or sum is not between 1 and 10, return false
-    } else if ((playerFingers < 1) | (playerFingers > 5) | (playerSum < 1) | (playerSum > 10)) {
+    } else if ((playerFingers < 1) || (playerFingers > 5) || (playerSum < 1) || (playerSum > 10)) {
       validInput = false;
     } else {
       validInput = true;
@@ -53,31 +52,31 @@ public class Human {
   public int getAverageFingers() {
     int averageFingers = 0;
     int sum = 0;
-    for (String fingers : historyHumanInput) {
-      sum += Integer.parseInt(fingers);
+    for (String fingers : historyPlayerFingers) {
+      sum += Integer.valueOf(fingers);
     }
-    averageFingers = sum / historyHumanInput.size();
-    return averageFingers;
+    averageFingers = sum / historyPlayerFingers.size();
+    return Math.round(averageFingers);
   }
 
   // get most frequent fingers of player
   public int getMostFrequentFingers() {
     int maxCount = 0;
-    int fingersMaxFreq = 0;
-    for (int i = 0; i < historyHumanInput.size(); i++) {
-      int playerFingers = Integer.parseInt(historyHumanInput.get(i));
+    int maxFreqFingers = 0;
+    for (int i = 0; i < historyPlayerFingers.size(); i++) {
+      int playerFingers = Integer.valueOf(historyPlayerFingers.get(i));
       int count = 0;
-      for (int j = 0; j < historyHumanInput.size(); j++) {
-        int playerFingers2 = Integer.parseInt(historyHumanInput.get(j));
-        if (playerFingers == playerFingers2) {
+      for (int j = 0; j < historyPlayerFingers.size(); j++) {
+        int comparedFingers = Integer.valueOf(historyPlayerFingers.get(j));
+        if (playerFingers == comparedFingers) {
           count++;
         }
       }
       if (count > maxCount) {
         maxCount = count;
-        fingersMaxFreq = playerFingers;
+        maxFreqFingers = playerFingers;
       }
     }
-    return fingersMaxFreq;
+    return maxFreqFingers;
   }
 }

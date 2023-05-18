@@ -15,7 +15,7 @@ public class JarvisFactory {
                 return new HardLevel(new TopStrategy());
 
             case MASTER:
-                return new MasterType();
+                return new MasterType(new RandomStrategy());
             
             default:
                 return null;

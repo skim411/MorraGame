@@ -8,22 +8,9 @@ public class MasterLevel implements DifficultyLevel {
     this.master = strategy;
   }
 
-  public void setStrategy(Strategy strategy) {
-    this.master = strategy;
-  }
-
-  public void changeStrategy(Morra game) {
-    // change strategy after 3 rounds
-    if (game.getRound() <= 3) {
-      master = new RandomStrategy();
-    } else {
-      if (game.getRound() % 2 == 0) {
-        master = new AverageStrategy();
-      } else if (game.getRound() % 2 == 1) {
-        master = new TopStrategy();
-      }
-    }
-  }
+  // public void setStrategy(Strategy strategy) {
+  //   this.master = strategy;
+  // }
 
   @Override
   public String[] getJarvisHand(int numOfRound, Human player) {

@@ -27,6 +27,10 @@ public class Human {
     return playerHand;
   }
 
+  public List<String> getHistoryPlayerFingers() {
+    return historyPlayerFingers;
+  }
+
   public Boolean checkInput(String input) {
     // check player's input
     Boolean validInput = false;
@@ -42,37 +46,5 @@ public class Human {
       validInput = true;
     }
     return validInput;
-  }
-
-  // get average of player's fingers
-  public int getAverageFingers() {
-    int sum = 0;
-    for (String fingers : historyPlayerFingers) {
-      sum += Integer.valueOf(fingers);
-    }
-    int averageFingers = sum / historyPlayerFingers.size();
-    return Math.round(averageFingers);
-  }
-
-  // get most frequent fingers of player
-  public int getMostFrequentFingers() {
-    int maxCount = 0;
-    int maxFreqFingers = 0;
-    // loop through historyPlayerFingers to get the most frequent fingers
-    for (int i = 0; i < historyPlayerFingers.size(); i++) {
-      int playerFingers = Integer.valueOf(historyPlayerFingers.get(i));
-      int count = 0;
-      for (int j = 0; j < historyPlayerFingers.size(); j++) {
-        int comparedFingers = Integer.valueOf(historyPlayerFingers.get(j));
-        if (playerFingers == comparedFingers) {
-          count++;
-        }
-      }
-      if (count > maxCount) {
-        maxCount = count;
-        maxFreqFingers = playerFingers;
-      }
-    }
-    return maxFreqFingers;
   }
 }

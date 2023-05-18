@@ -45,11 +45,10 @@ public class Morra {
       MessageCli.START_ROUND.printMessage(Integer.toString(numOfRound));
       MessageCli.ASK_INPUT.printMessage();
 
-      JarvisFactory jarvisFactory = new JarvisFactory();
-      DifficultyLevel difficultyType = jarvisFactory.createDifficulty(numOfRound, currentDifficulty);
+      DifficultyLevel difficultyLevel = JarvisFactory.createDifficulty(numOfRound, currentDifficulty);
 
       // get the fingers and sum from player and jarvis
-      jarvisHand = difficultyType.getJarvisHand(numOfRound, player);
+      jarvisHand = difficultyLevel.getJarvisHand(numOfRound, player);
       playerHand = player.getPlayerHand();
 
       MessageCli.PRINT_INFO_HAND.printMessage(playerName, playerHand[0], playerHand[1]);

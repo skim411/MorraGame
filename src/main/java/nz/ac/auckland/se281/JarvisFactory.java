@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class JarvisFactory {
-  public DifficultyLevel createDifficulty(int numOfRound, Difficulty difficulty) {
+  public static DifficultyLevel createDifficulty(int numOfRound, Difficulty difficulty) {
     // create different difficulty level based on the input
     switch (difficulty) {
       case EASY:

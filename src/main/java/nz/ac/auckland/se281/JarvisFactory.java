@@ -3,7 +3,7 @@ package nz.ac.auckland.se281;
 import nz.ac.auckland.se281.Main.Difficulty;
 
 public class JarvisFactory {
-  public DifficultyLevel createDifficulty(Difficulty difficulty) {
+  public DifficultyLevel createDifficulty(int numOfRound, Difficulty difficulty) {
     // create different difficulty level based on the input
     switch (difficulty) {
       case EASY:
@@ -16,7 +16,13 @@ public class JarvisFactory {
         return new HardLevel(new TopStrategy());
 
       case MASTER:
-        return new MasterLevel(new RandomStrategy());
+        if (numOfRound <= 3) {
+          return new MasterLevel(new RandomStrategy());
+        } else if (numOfRound > 3 && numOfRound % 2 == 0) {
+          return new MasterLevel(new AverageStrategy());
+        } else {
+          return new MasterLevel(new TopStrategy());
+        }
 
       default:
         return null;

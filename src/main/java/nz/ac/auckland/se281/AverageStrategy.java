@@ -13,7 +13,7 @@ public class AverageStrategy implements Strategy {
     int jarvisFingers = Integer.valueOf(averageJavisHand[0]);
 
     // if number of round is less than 5, jarvis will randomly choose sum
-    if (numOfRound <= 4) {
+    if (numOfRound < 4) {
       // averageJavisHand[0] = Integer.toString(Utils.getRandomNumber(1, 5));
       // int jarvisFingers = Integer.valueOf(averageJavisHand[0]);
       int min = jarvisFingers + 1;

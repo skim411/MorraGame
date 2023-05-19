@@ -4,8 +4,8 @@ public class HardLevel implements DifficultyLevel {
 
   private Strategy top;
 
-  public HardLevel(Strategy strategy) {
-    this.top = strategy;
+  public HardLevel(int numOfRound, Human player) {
+    this.top = new TopStrategy(numOfRound, player);
   }
 
   @Override

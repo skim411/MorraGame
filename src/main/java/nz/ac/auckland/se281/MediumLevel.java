@@ -4,8 +4,8 @@ public class MediumLevel implements DifficultyLevel {
 
   private Strategy average;
 
-  public MediumLevel(Strategy strategy) {
-    this.average = strategy;
+  public MediumLevel(int numOfRound, Human player) {
+    this.average = new AverageStrategy(numOfRound, player);
   }
 
   @Override

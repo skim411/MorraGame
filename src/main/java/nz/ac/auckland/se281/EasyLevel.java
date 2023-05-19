@@ -4,8 +4,8 @@ public class EasyLevel implements DifficultyLevel {
 
   private Strategy random;
 
-  public EasyLevel(Strategy strategy) {
-    this.random = strategy;
+  public EasyLevel() {
+    this.random = new RandomStrategy();
   }
 
   @Override

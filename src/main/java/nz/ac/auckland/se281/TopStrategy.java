@@ -5,9 +5,15 @@ import java.util.List;
 public class TopStrategy implements Strategy {
 
   private List<String> historyPlayerFingers;
+  private int numOfRound;
+
+  public TopStrategy(int numOfRound, Human player) {
+    this.numOfRound = numOfRound;
+    this.historyPlayerFingers = player.getHistoryPlayerFingers();
+  }
 
   @Override
-  public String[] decideJarvisHand(int numOfRound, Human player) {
+  public String[] decideJarvisHand() {
     String[] topJavisHand = new String[2];
     topJavisHand[0] = Integer.toString(Utils.getRandomNumber(1, 5));
     int jarvisFingers = Integer.valueOf(topJavisHand[0]);
@@ -19,17 +25,10 @@ public class TopStrategy implements Strategy {
     } else {
       // if number of round is greater or equal to 5, jarvis will get the most common fingers
       // that player has played
-      getHistoryPlayerFingers(player);
       int mostCommonFingers = getMostFrequentFingers();
       topJavisHand[1] = Integer.toString(jarvisFingers + mostCommonFingers);
     }
     return topJavisHand;
-  }
-
-  @Override
-  public List<String> getHistoryPlayerFingers(Human player) {
-    historyPlayerFingers = player.getHistoryPlayerFingers();
-    return historyPlayerFingers;
   }
 
   // get most frequent fingers of player

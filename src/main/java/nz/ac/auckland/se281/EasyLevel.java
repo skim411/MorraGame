@@ -9,7 +9,7 @@ public class EasyLevel implements DifficultyLevel {
   }
 
   @Override
-  public String[] getJarvisHand(int numOfRound, Human player) {
-    return random.decideJarvisHand(numOfRound, player);
+  public String[] getJarvisHand() {
+    return random.decideJarvisHand();
   }
 }

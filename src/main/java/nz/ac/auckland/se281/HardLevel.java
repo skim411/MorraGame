@@ -9,7 +9,7 @@ public class HardLevel implements DifficultyLevel {
   }
 
   @Override
-  public String[] getJarvisHand(int numOfRound, Human player) {
-    return top.decideJarvisHand(numOfRound, player);
+  public String[] getJarvisHand() {
+    return top.decideJarvisHand();
   }
 }

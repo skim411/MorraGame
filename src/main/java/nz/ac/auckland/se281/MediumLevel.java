@@ -9,7 +9,7 @@ public class MediumLevel implements DifficultyLevel {
   }
 
   @Override
-  public String[] getJarvisHand(int numOfRound, Human player) {
-    return average.decideJarvisHand(numOfRound, player);
+  public String[] getJarvisHand() {
+    return average.decideJarvisHand();
   }
 }

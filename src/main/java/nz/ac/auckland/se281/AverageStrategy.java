@@ -5,9 +5,15 @@ import java.util.List;
 public class AverageStrategy implements Strategy {
 
   private List<String> historyPlayerFingers;
+  private int numOfRound;
+
+  public AverageStrategy(int numOfRound, Human player) {
+    this.numOfRound = numOfRound;
+    this.historyPlayerFingers = player.getHistoryPlayerFingers();
+  }
 
   @Override
-  public String[] decideJarvisHand(int numOfRound, Human player) {
+  public String[] decideJarvisHand() {
     String[] averageJavisHand = new String[2];
     averageJavisHand[0] = Integer.toString(Utils.getRandomNumber(1, 5));
     int jarvisFingers = Integer.valueOf(averageJavisHand[0]);
@@ -20,18 +26,10 @@ public class AverageStrategy implements Strategy {
     } else {
       // if number of round is greater or equal to 5, jarvis will get the average fingers that
       // player has played
-      System.out.println(jarvisFingers);
-      getHistoryPlayerFingers(player);
       int avg = getAverageFingers();
       averageJavisHand[1] = Integer.toString(jarvisFingers + avg);
     }
     return averageJavisHand;
-  }
-
-  @Override
-  public List<String> getHistoryPlayerFingers(Human player) {
-    historyPlayerFingers = player.getHistoryPlayerFingers();
-    return historyPlayerFingers;
   }
 
   // get average of player's fingers

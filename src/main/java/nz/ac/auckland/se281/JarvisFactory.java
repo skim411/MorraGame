@@ -4,7 +4,8 @@ import nz.ac.auckland.se281.Main.Difficulty;
 
 public class JarvisFactory {
 
-  public static DifficultyLevel createDifficulty(int numOfRound, Difficulty difficulty, Human player) {
+  public static DifficultyLevel createDifficulty(
+      int numOfRound, Difficulty difficulty, Human player) {
     // create different difficulty level based on the input
     switch (difficulty) {
       case EASY:

@@ -18,11 +18,11 @@ public class MasterLevel implements DifficultyLevel {
   public void changeStrategy() {
     // change strategy based on the number of round
     if (numOfRound <= 3) {
-        setStrategy(new RandomStrategy());
+      setStrategy(new RandomStrategy());
     } else if (numOfRound > 3 && numOfRound % 2 == 0) {
-        setStrategy(new AverageStrategy(numOfRound, player));
+      setStrategy(new AverageStrategy(numOfRound, player));
     } else {
-        setStrategy(new TopStrategy(numOfRound, player));
+      setStrategy(new TopStrategy(numOfRound, player));
     }
   }
 

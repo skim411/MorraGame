@@ -17,7 +17,7 @@ public class Human {
       String input = Utils.scanner.nextLine();
       // split input to 2 and name first substring as playerFingers and second as playerSum
       playerHand = input.split(" ", 2);
-      validInput = checkInput(input);
+      validInput = checkInput(playerHand);
       if (!validInput) {
         MessageCli.INVALID_INPUT.printMessage();
         MessageCli.ASK_INPUT.printMessage();
@@ -32,15 +32,18 @@ public class Human {
     return historyPlayerFingers;
   }
 
-  public Boolean checkInput(String input) {
-    // check player's input
-    int playerFingers = Integer.valueOf(playerHand[0]);
-    int playerSum = Integer.valueOf(playerHand[1]);
-    // if input is not integer, return false
-    if (!Utils.isInteger(playerHand[0]) || !Utils.isInteger(playerHand[1])) {
+  public Boolean checkInput(String[] playerHand) {
+    // if size of playerFinger is not equal to 2, return false
+    if (playerHand.length != 2) {
+      validInput = false;
+      // if input is not integer, return false
+    } else if (!Utils.isInteger(playerHand[0]) || !Utils.isInteger(playerHand[1])) {
       validInput = false;
       // if fingers is not between 1 and 5 or sum is not between 1 and 10, return false
-    } else if ((playerFingers < 1) || (playerFingers > 5) || (playerSum < 1) || (playerSum > 10)) {
+    } else if ((Integer.valueOf(playerHand[0]) < 1)
+        || (Integer.valueOf(playerHand[0]) > 5)
+        || (Integer.valueOf(playerHand[1]) < 1)
+        || (Integer.valueOf(playerHand[1]) > 10)) {
       validInput = false;
     } else {
       validInput = true;

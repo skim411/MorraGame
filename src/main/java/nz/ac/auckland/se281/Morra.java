@@ -53,12 +53,12 @@ public class Morra {
   public void getResult(String[] jarvisHand, String[] playerHand) {
     // get the sum of fingers from jarvis and human
     int sum = Integer.valueOf(jarvisHand[0]) + Integer.valueOf(playerHand[0]);
-    int jarvisSum = Integer.valueOf(jarvisHand[1]);
-    int playerSum = Integer.valueOf(playerHand[1]);
+    Boolean jarvisWin = (sum == Integer.valueOf(jarvisHand[1]));
+    Boolean playerWin = (sum == Integer.valueOf(playerHand[1]));
     // print the result of the round and update the score
-    if ((sum == playerSum && sum == jarvisSum) || (sum != playerSum && sum != jarvisSum)) {
+    if ((playerWin && jarvisWin) || (!playerWin && !jarvisWin)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
-    } else if (sum == jarvisSum) {
+    } else if (jarvisWin) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
       jarvisScore++;
     } else {

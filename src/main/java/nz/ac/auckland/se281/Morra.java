@@ -28,14 +28,6 @@ public class Morra {
     player = new Human();
   }
 
-  public String getPlayerName() {
-    return playerName;
-  }
-
-  public int getRound() {
-    return numOfRound;
-  }
-
   public void play() {
     // check if the game is over or not
     if (jarvisScore == requiredPointsToWin || playerScore == requiredPointsToWin) {
@@ -60,20 +52,18 @@ public class Morra {
 
   public void getResult(String[] jarvisHand, String[] playerHand) {
     // get the sum of fingers from jarvis and human
-    int jarvisFinger = Integer.valueOf(jarvisHand[0]);
-    int playerFinger = Integer.valueOf(playerHand[0]);
-    int sum = jarvisFinger + playerFinger;
+    int sum = Integer.valueOf(jarvisHand[0]) + Integer.valueOf(playerHand[0]);
+    int jarvisSum = Integer.valueOf(jarvisHand[1]);
+    int playerSum = Integer.valueOf(playerHand[1]);
     // print the result of the round and update the score
-    if (sum == Integer.valueOf(playerHand[1]) && sum == Integer.valueOf(jarvisHand[1])) {
+    if ((sum == playerSum && sum == jarvisSum) || (sum != playerSum && sum != jarvisSum)) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
-    } else if (sum == Integer.valueOf(jarvisHand[1])) {
+    } else if (sum == jarvisSum) {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("AI_WINS");
       jarvisScore++;
-    } else if (sum == Integer.valueOf(playerHand[1])) {
+    } else {
       MessageCli.PRINT_OUTCOME_ROUND.printMessage("HUMAN_WINS");
       playerScore++;
-    } else {
-      MessageCli.PRINT_OUTCOME_ROUND.printMessage("DRAW");
     }
 
     // if the game is over, print the winner

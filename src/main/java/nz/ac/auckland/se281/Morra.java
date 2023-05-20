@@ -66,7 +66,7 @@ public class Morra {
       playerScore++;
     }
 
-    // if the game is over, print the winner
+    // if the game is over, print the winner and set number of round as 0
     if (jarvisScore == requiredPointsToWin) {
       MessageCli.END_GAME.printMessage("Jarvis", String.valueOf(numOfRound));
       numOfRound = 0;

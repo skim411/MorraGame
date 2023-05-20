@@ -9,8 +9,6 @@ public class Human {
   private List<String> historyPlayerFingers = new ArrayList<>();
   private Boolean validInput;
 
-  public Human() {}
-
   public String[] getPlayerHand() {
     validInput = false;
 

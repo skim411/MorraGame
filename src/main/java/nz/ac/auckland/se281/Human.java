@@ -13,9 +13,8 @@ public class Human {
     validInput = false;
 
     while (!validInput) {
-      // scan player's input
+      // scan player's input and split input to 2
       String input = Utils.scanner.nextLine();
-      // split input to 2 and name first substring as playerFingers and second as playerSum
       playerHand = input.split(" ", 2);
       validInput = checkInput(playerHand);
       if (!validInput) {
@@ -33,11 +32,8 @@ public class Human {
   }
 
   public Boolean checkInput(String[] playerHand) {
-    // if size of playerFinger is not equal to 2, return false
-    if (playerHand.length != 2) {
-      validInput = false;
-      // if input is not integer, return false
-    } else if (!Utils.isInteger(playerHand[0]) || !Utils.isInteger(playerHand[1])) {
+    // if input is not integer, return false
+    if (!Utils.isInteger(playerHand[0]) || !Utils.isInteger(playerHand[1])) {
       validInput = false;
       // if fingers is not between 1 and 5 or sum is not between 1 and 10, return false
     } else if ((Integer.valueOf(playerHand[0]) < 1)
